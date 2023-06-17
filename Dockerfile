@@ -14,8 +14,9 @@ EXPOSE 3000
 FROM nginx:stable-alpine
 COPY --from=build . .
 RUN addgroup -S nginx && adduser -S -D nginx -G nginx
+COPY ./certs /etc/nginx/certs
 COPY ./deployment/default.conf /etc/nginx/conf.d
 WORKDIR /app
-EXPOSE 5223
+EXPOSE 443
 
 CMD supervisord -c /src/supervisor/supervisord.conf
