@@ -8,7 +8,8 @@ COPY --from=0 . .
 WORKDIR /app
 COPY package.json /app/package.json
 COPY . /app
-RUN npm install --only=prod
+RUN yarn install
+RUN yarn build
 EXPOSE 3000
 
 FROM nginx:stable-alpine
